@@ -22,15 +22,15 @@ export class Rutas {
   fkIdCrono: number;
 
   @ManyToOne(() => Vehiculo, (vehiculo) => vehiculo.rutas, {
-    onDelete: "RESTRICT",
-    onUpdate: "RESTRICT",
+    onDelete: "NO ACTION",
+    onUpdate: "NO ACTION",
   })
   @JoinColumn([{ name: "fk_NumInterno", referencedColumnName: "numInterno" }])
   fkNumInterno2: Vehiculo;
 
   @ManyToOne(() => Cronograma, (cronograma) => cronograma.rutas, {
-    onDelete: "RESTRICT",
-    onUpdate: "RESTRICT",
+    onDelete: "NO ACTION",
+    onUpdate: "NO ACTION",
   })
   @JoinColumn([{ name: "fk_idCrono", referencedColumnName: "idCrono" }])
   fkIdCrono2: Cronograma;

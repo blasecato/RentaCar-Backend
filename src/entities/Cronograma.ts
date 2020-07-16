@@ -25,8 +25,8 @@ export class Cronograma {
   fkIdHorario: number;
 
   @ManyToOne(() => Horario, (horario) => horario.cronogramas, {
-    onDelete: "RESTRICT",
-    onUpdate: "RESTRICT",
+    onDelete: "NO ACTION",
+    onUpdate: "NO ACTION",
   })
   @JoinColumn([{ name: "fk_idHorario", referencedColumnName: "idHorario" }])
   fkIdHorario2: Horario;

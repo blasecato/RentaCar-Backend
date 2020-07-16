@@ -60,8 +60,8 @@ export class Vehiculo {
   rutas: Rutas[];
 
   @ManyToOne(() => Tipovehiculo, (tipovehiculo) => tipovehiculo.vehiculos, {
-    onDelete: "RESTRICT",
-    onUpdate: "RESTRICT",
+    onDelete: "NO ACTION",
+    onUpdate: "NO ACTION",
   })
   @JoinColumn([
     { name: "fk_IdTipoVehiculo", referencedColumnName: "idTipoVehiculo" },

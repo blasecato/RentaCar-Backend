@@ -24,7 +24,7 @@ export class Documentacion {
   @ManyToOne(
     () => Tipodocumentacion,
     (tipodocumentacion) => tipodocumentacion.documentacions,
-    { onDelete: "RESTRICT", onUpdate: "RESTRICT" }
+    { onDelete: "NO ACTION", onUpdate: "NO ACTION" }
   )
   @JoinColumn([
     {
@@ -35,8 +35,8 @@ export class Documentacion {
   fkIdTipoDocumentacion2: Tipodocumentacion;
 
   @ManyToOne(() => Vehiculo, (vehiculo) => vehiculo.documentacions, {
-    onDelete: "RESTRICT",
-    onUpdate: "RESTRICT",
+    onDelete: "NO ACTION",
+    onUpdate: "NO ACTION",
   })
   @JoinColumn([{ name: "fk_NumInterno", referencedColumnName: "numInterno" }])
   fkNumInterno2: Vehiculo;

@@ -20,8 +20,8 @@ export class Planilla {
   fkIdConductor: number;
 
   @ManyToOne(() => Conductor, (conductor) => conductor.planillas, {
-    onDelete: "RESTRICT",
-    onUpdate: "RESTRICT",
+    onDelete: "NO ACTION",
+    onUpdate: "NO ACTION",
   })
   @JoinColumn([{ name: "fk_idConductor", referencedColumnName: "idConductor" }])
   fkIdConductor2: Conductor;

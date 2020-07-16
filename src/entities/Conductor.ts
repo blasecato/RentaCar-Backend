@@ -22,8 +22,8 @@ export class Conductor {
   fkNumInterno: number;
 
   @ManyToOne(() => Vehiculo, (vehiculo) => vehiculo.conductors, {
-    onDelete: "RESTRICT",
-    onUpdate: "RESTRICT",
+    onDelete: "NO ACTION",
+    onUpdate: "NO ACTION",
   })
   @JoinColumn([{ name: "fk_NumInterno", referencedColumnName: "numInterno" }])
   fkNumInterno2: Vehiculo;

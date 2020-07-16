@@ -19,15 +19,15 @@ export class Revision {
   fkNumInterno: number;
 
   @ManyToOne(() => Vehiculo, (vehiculo) => vehiculo.revisions, {
-    onDelete: "RESTRICT",
-    onUpdate: "RESTRICT",
+    onDelete: "NO ACTION",
+    onUpdate: "NO ACTION",
   })
   @JoinColumn([{ name: "fk_NumInterno", referencedColumnName: "numInterno" }])
   fkNumInterno2: Vehiculo;
 
   @ManyToOne(() => Tiporevision, (tiporevision) => tiporevision.revisions, {
-    onDelete: "RESTRICT",
-    onUpdate: "RESTRICT",
+    onDelete: "NO ACTION",
+    onUpdate: "NO ACTION",
   })
   @JoinColumn([
     { name: "fk_idTipoRevision", referencedColumnName: "idTipoRevision" },
