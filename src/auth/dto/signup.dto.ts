@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString, IsEmail, Length, IsNumber, IsOptional } from 'class-validator';
+import { IsNotEmpty, IsString, IsEmail,IsDate, Length, IsNumber, IsOptional } from 'class-validator';
 
 export class SignUpDto {
   @IsString()
@@ -11,9 +11,9 @@ export class SignUpDto {
   @IsString()
   cedula: string;
 
-  @IsString()
+  @IsDate()
   @IsOptional()
-  fechaNacimiento: string;
+  fechaNacimiento: Date;
 
   @IsString()
   telefono: string;

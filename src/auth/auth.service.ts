@@ -20,7 +20,7 @@ export class AuthService {
   async getStructureToken(email: string) {
     return await this.personaRepository.createQueryBuilder("persona")
       .select(['persona.idPersona', 'persona.nombres', 'persona.apellidos', 'persona.cedula',
-        'persona.fechaNacimiento', 'persona.direccion', 'persona.telefono', 'persona.fechaAfiliacion',
+        'persona.fechaNacimiento', 'persona.direccion', 'persona.telefono',
         'persona.EstadoPersona'])
       .addSelect(['User.idUser', 'User.email'])
       .innerJoin('persona.users', 'User')
@@ -64,6 +64,7 @@ export class AuthService {
     } else if (validatePerson) {
       return { error: 'IDENTIFICATION_CARD_IN_USE', detail: 'La cédula de ciudadanía ya está siendo utilizada.' };
     } else {
+      
       try {
         const person = await this.personaRepository.save({
           nombres: body.nombres,
@@ -72,7 +73,7 @@ export class AuthService {
           fechaNacimiento: body.fechaNacimiento,
           telefono: body.telefono,
           direccion: body.direccion,
-          fechaAfiliacion: body.fechaAfiliacion,
+          // fechaAfiliacion: body.fechaAfiliacion,
           estadoPersona: "1",
           idGenero: {id: body.idGenero}
         });
