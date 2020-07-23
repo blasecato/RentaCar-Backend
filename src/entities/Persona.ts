@@ -28,24 +28,24 @@ export class Persona {
   @Column("varchar", { name: "apellidos", length: 20 })
   apellidos: string;
 
-  @Column("date", { name: "fechaNacimiento" })
-  fechaNacimiento: string;
+  @Column("timestamp", { name: "fechaNacimiento" })
+  fechaNacimiento: Date | null;
 
   @Column("varchar", { name: "direccion", nullable: true, length: 30 })
   direccion: string | null;
 
   @Column("varchar", { name: "telefono", nullable: true })
-  telefono: string | null;
+  telefono: string | null; 
 
-  @Column("date", { name: "fechaAfiliacion" })
-  fechaAfiliacion: string;
+  // @Column("date", { name: "fechaAfiliacion" })
+  // fechaAfiliacion: string | null;
 
   @Column("varchar", { name: "EstadoPersona", length: 1 })
-  estadoPersona: string;
+  estadoPersona: string | null;
 
   @ManyToOne(() => Genero, genero => genero.personas, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
   @JoinColumn([{ name: "fk_genero" , referencedColumnName:'id' }])
-  genero: Genero[];
+  genero: Genero[] | null;
 
   @OneToMany(() => User, (user) => user.persona)
   users: User[];
