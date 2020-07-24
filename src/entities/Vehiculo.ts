@@ -12,6 +12,7 @@ import { Propietario } from "./Propietario";
 import { Revision } from "./Revision";
 import { Rutas } from "./Rutas";
 import { Tipovehiculo } from "./Tipovehiculo";
+import { Persona } from "./Persona";
 
 @Index("placa", ["placa"], { unique: true })
 @Index("fk_vehiculo", ["fkIdTipoVehiculo"], {})
@@ -67,4 +68,11 @@ export class Vehiculo {
     { name: "fk_IdTipoVehiculo", referencedColumnName: "idTipoVehiculo" },
   ])
   fkIdTipoVehiculo2: Tipovehiculo;
+
+  @ManyToOne(() => Persona, (person) => person.idPersona,)
+    person: Persona[];
+  @JoinColumn({ name: "fk_PersonaVehiculo" ,referencedColumnName:'idPersona' })
+    profession: Promise<Persona>;
+
+
 }

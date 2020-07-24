@@ -11,6 +11,7 @@ import {
 } from "typeorm";
 import { Genero } from "./Genero";
 import { User } from "./User";
+import { Vehiculo } from "./Vehiculo";
 
 @Index("cedula", ["cedula"], { unique: true })
 // @Index("fk_idGenero", ["fkIdGenero"], {})
@@ -49,4 +50,7 @@ export class Persona {
 
   @OneToMany(() => User, (user) => user.persona)
   users: User[];
+
+  @OneToMany(() => Vehiculo, (vechiculo) => vechiculo.propietarios)
+  vechile: Vehiculo[];
 }
