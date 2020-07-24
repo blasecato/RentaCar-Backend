@@ -13,18 +13,18 @@ export class PersonaController {
     constructor(private readonly personaService: PersonaService){}
     //sirve
     @Get('getUsers')
-    findAll(): Promise<Persona[]>{
-         return this.personaService.findAll();
+    async findAll(): Promise<Persona[]>{
+         return await  this.personaService.findAll();
     }
 
     @Get(':id')
-    findOne(@Param('id') id):Promise<Persona>{
-        return this.personaService.getById(id);
+    async findOne(@Param('id') id):Promise<Persona>{
+        return await this.personaService.getById(id);
     }
 
     @Get('getUser/:email')
-    findEmail(@Param('email') email):Promise<User>{
-        return this.personaService.getByEmail(email);
+    async findEmail(@Param('email') email):Promise<User>{
+        return await this.personaService.getByEmail(email);
     }
 
 } 
