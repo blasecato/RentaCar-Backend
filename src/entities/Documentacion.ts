@@ -1,43 +1,28 @@
-import { Column, Entity, Index, JoinColumn, ManyToOne } from "typeorm";
-import { Tipodocumentacion } from "./Tipodocumentacion";
+import { Column, Entity, Index, JoinColumn, ManyToOne, PrimaryGeneratedColumn, OneToOne } from "typeorm";
 import { Vehiculo } from "./Vehiculo";
+import { Revision } from "./Revision";
+import { seguro } from "./seguro";
+import { cda } from "./cda";
 
-@Index("fk_documentacion", ["fkIdTipoDocumentacion"], {})
-@Index("fk_documentacionVeh", ["fkNumInterno"], {})
+
 @Entity("documentacion", { schema: "rentautos" })
 export class Documentacion {
-  @Column("int", { primary: true, name: "idDocumentacion" })
+
+
+  @PrimaryGeneratedColumn({ type: "bigint", name: "idDocumentacion" })
   idDocumentacion: number;
 
-  @Column("date", { name: "FechaAfiliacionVehiculo" })
-  fechaAfiliacionVehiculo: string;
+  @Column("varchar")
+  descripcion: string;
 
-  @Column("date", { name: "FechaRetiroVehiculo", nullable: true })
-  fechaRetiroVehiculo: string | null;
+  @OneToOne(() => Revision, (revision) => revision.documentacion)
+  @JoinColumn()
+  revision: Revision[];
 
-  @Column("int", { name: "fk_idTipoDocumentacion" })
-  fkIdTipoDocumentacion: number;
+  @OneToOne(() => seguro, (Seguro) => Seguro.documentacion)
+  seguro: seguro[];
 
-  @Column("int", { name: "fk_NumInterno" })
-  fkNumInterno: number;
+  @OneToOne(() => cda, (Cda) => Cda.documentacion)
+  cda: cda[];
 
-  @ManyToOne(
-    () => Tipodocumentacion,
-    (tipodocumentacion) => tipodocumentacion.documentacions,
-    { onDelete: "NO ACTION", onUpdate: "NO ACTION" }
-  )
-  @JoinColumn([
-    {
-      name: "fk_idTipoDocumentacion",
-      referencedColumnName: "idTipoDocumentacion",
-    },
-  ])
-  fkIdTipoDocumentacion2: Tipodocumentacion;
-
-  @ManyToOne(() => Vehiculo, (vehiculo) => vehiculo.documentacions, {
-    onDelete: "NO ACTION",
-    onUpdate: "NO ACTION",
-  })
-  @JoinColumn([{ name: "fk_NumInterno", referencedColumnName: "numInterno" }])
-  fkNumInterno2: Vehiculo;
 }

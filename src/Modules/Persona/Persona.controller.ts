@@ -1,11 +1,11 @@
 import {  Controller,Get,Post,Put,Delete,Body,Param, UseGuards, Request } from '@nestjs/common';
 
 import { AuthGuard } from '@nestjs/passport';
-import { RolesGuard } from '../common/guards/roles.guard';
+import { RolesGuard } from '../../common/guards/roles.guard';
 import {PersonaService } from "./Persona.service";
-import { Persona } from "../entities/Persona";
-import { User } from "../entities/User";
-import { Roles } from '../common/decorators/roles.decorator';
+import { Persona } from "../../entities/Persona";
+import { User } from "../../entities/User";
+import { Roles } from '../../common/decorators/roles.decorator';
 
 
 @Controller('persona')

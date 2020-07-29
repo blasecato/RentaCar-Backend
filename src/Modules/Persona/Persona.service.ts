@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Model } from 'mysql'
-import { Persona } from '../entities/Persona';
-import { User } from '../entities/User';
+import { Persona } from '../../entities/Persona';
+import { User } from '../../entities/User';
 
 @Injectable()
 export class PersonaService {
@@ -42,7 +42,7 @@ export class PersonaService {
       .select("idUser", "id")
       .addSelect("email", "email")
       .addSelect("password", "password")
-      .leftJoinAndSelect("user.persona", "persona")
+      .innerJoinAndSelect("user.persona", "persona")
       .where("email = :emails", { emails: email })
       .execute();
   }

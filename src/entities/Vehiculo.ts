@@ -1,78 +1,83 @@
 import {
   Column,
   Entity,
-  Index,
   JoinColumn,
   ManyToOne,
   OneToMany,
+  PrimaryGeneratedColumn,
+  OneToOne,
 } from "typeorm";
-import { Conductor } from "./Conductor";
-import { Documentacion } from "./Documentacion";
-import { Propietario } from "./Propietario";
-import { Revision } from "./Revision";
-import { Rutas } from "./Rutas";
+
 import { Tipovehiculo } from "./Tipovehiculo";
 import { Persona } from "./Persona";
+import { color_vehiculo } from "./color_vehiculo";
+import { Planilla } from "./Planilla";
+import { marca } from "./marca";
+import { renta_vehiculo } from "./renta_vehiculo";
+import { estado_vehiculo } from "./estado_vehiculo";
+import { Revision } from "./Revision";
 
-@Index("placa", ["placa"], { unique: true })
-@Index("fk_vehiculo", ["fkIdTipoVehiculo"], {})
+
 @Entity("vehiculo", { schema: "rentautos" })
 export class Vehiculo {
-  @Column("int", { primary: true, name: "NumInterno" })
-  numInterno: number;
 
-  @Column("varchar", { name: "placa", unique: true, length: 6 })
+  @PrimaryGeneratedColumn({ type: "bigint", name: "id_vehiculo" })
+  id_vehiculo: number;
+
+  @Column("varchar")
   placa: string;
 
-  @Column("varchar", { name: "color", nullable: true, length: 20 })
-  color: string | null;
-
-  @Column("varchar", { name: "marca", length: 20 })
-  marca: string;
-
-  @Column("int", { name: "modelo" })
+  @Column("int")
   modelo: number;
 
-  @Column("int", { name: "cilindraje", nullable: true })
-  cilindraje: number | null;
+  @Column("int")
+  cilindraje: number;
 
-  @Column("int", { name: "capacidad" })
+  @Column("int")
   capacidad: number;
+  
+  @Column("int")
+  numInterno: number;
 
-  @Column("int", { name: "fk_IdTipoVehiculo" })
-  fkIdTipoVehiculo: number;
+  @Column("text")
+  descripcion: string;
 
-  @OneToMany(() => Conductor, (conductor) => conductor.fkNumInterno2)
-  conductors: Conductor[];
-
-  @OneToMany(
-    () => Documentacion,
-    (documentacion) => documentacion.fkNumInterno2
-  )
-  documentacions: Documentacion[];
-
-  @OneToMany(() => Propietario, (propietario) => propietario.fkNumInterno2)
-  propietarios: Propietario[];
-
-  @OneToMany(() => Revision, (revision) => revision.fkNumInterno2)
-  revisions: Revision[];
-
-  @OneToMany(() => Rutas, (rutas) => rutas.fkNumInterno2)
-  rutas: Rutas[];
-
-  @ManyToOne(() => Tipovehiculo, (tipovehiculo) => tipovehiculo.vehiculos, {
-    onDelete: "NO ACTION",
-    onUpdate: "NO ACTION",
-  })
-  @JoinColumn([
-    { name: "fk_IdTipoVehiculo", referencedColumnName: "idTipoVehiculo" },
-  ])
-  fkIdTipoVehiculo2: Tipovehiculo;
+  @Column("varchar")
+  recorrido: string;
 
   @ManyToOne(() => Persona, (person) => person.idPersona,)
-    person: Persona[];
-  @JoinColumn({ name: "fk_PersonaVehiculo" ,referencedColumnName:'idPersona' })
-    profession: Promise<Persona>;
+  person: Persona[];
+  @JoinColumn({ name: "fk_PersonaVehiculo", referencedColumnName: 'idPersona' })
+  persona: Persona[];
 
+  @ManyToOne(() => marca, (marca) => marca.vehicle)
+  marca: marca[];
+  @JoinColumn({ name: "fk_marca", referencedColumnName: 'id_vehiculo' })
+  marcas: marca[];
+
+  @ManyToOne(() => Tipovehiculo, (tvehiculo) => tvehiculo.idTipoVehiculo)
+  tvehiculo: Tipovehiculo[];
+  @JoinColumn({ name: "fk_tipoVehiculo", referencedColumnName: 'id_vehiculo' })
+  tvehiculos: Tipovehiculo[];
+
+  @OneToOne(() => color_vehiculo, (color_vehi) => color_vehi.Vehiculo)
+  @JoinColumn()
+  color_vehi: color_vehiculo[];
+
+  @OneToOne(() => Planilla, (planilla) => planilla.vehiculo)
+  @JoinColumn()
+  planilla: Planilla[];
+
+  @OneToOne(() => renta_vehiculo, (rentavehiculo) => rentavehiculo.Vehiculo)
+  @JoinColumn()
+  rentavehiculo: renta_vehiculo[];
+
+  @OneToOne(() => estado_vehiculo, (estadovehiculo) => estadovehiculo.Vehiculo)
+  @JoinColumn()
+  estadovehiculo: estado_vehiculo[];
+
+  @OneToMany(() => Revision, (revision) => revision.vehiculo)
+  @JoinColumn()
+  revision: Revision[];
 
 }

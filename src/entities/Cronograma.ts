@@ -5,32 +5,31 @@ import {
   JoinColumn,
   ManyToOne,
   OneToMany,
+  PrimaryGeneratedColumn,
 } from "typeorm";
 import { Horario } from "./Horario";
-import { Rutas } from "./Rutas";
+import { Planilla } from "./Planilla";
 
-@Index("fk_cronograma", ["fkIdHorario"], {})
+
 @Entity("cronograma", { schema: "rentautos" })
 export class Cronograma {
-  @Column("int", { primary: true, name: "idCrono" })
+
+  @PrimaryGeneratedColumn({type: "bigint", name: "idCrono"})
   idCrono: number;
 
-  @Column("varchar", { name: "descripcion", length: 20 })
+  @Column("varchar")
   descripcion: string;
 
-  @Column("datetime", { name: "HorarioCrono" })
-  horarioCrono: Date;
+  @Column("datetime")
+  horariocrono: Date;
 
-  @Column("int", { name: "fk_idHorario" })
-  fkIdHorario: number;
+  @ManyToOne(() => Planilla, (planilla)=> planilla.cronogram)
+  planilla: Planilla[];
 
-  @ManyToOne(() => Horario, (horario) => horario.cronogramas, {
-    onDelete: "NO ACTION",
-    onUpdate: "NO ACTION",
-  })
-  @JoinColumn([{ name: "fk_idHorario", referencedColumnName: "idHorario" }])
-  fkIdHorario2: Horario;
+  @ManyToOne(()=>Horario, (horario)=> horario.cronogramas)
+  horario: Horario[];
+  @JoinColumn({ name: "fk_horario", referencedColumnName: 'idHorario' })
+  horarios:Horario[];
 
-  @OneToMany(() => Rutas, (rutas) => rutas.fkIdCrono2)
-  rutas: Rutas[];
+  
 }

@@ -1,22 +1,13 @@
-import {
-  Column,
-  Entity,
-  Index,
-  JoinColumn,
-  ManyToOne,
-  OneToMany,
-  PrimaryColumn,
-  PrimaryGeneratedColumn,
-  OneToOne,
-} from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, } from "typeorm";
 import { Genero } from "./Genero";
 import { User } from "./User";
 import { Vehiculo } from "./Vehiculo";
+import { empresa } from "./Empresa";
 
-@Index("cedula", ["cedula"], { unique: true })
-// @Index("fk_idGenero", ["fkIdGenero"], {})
+
 @Entity("persona", { schema: "rentautos" })
 export class Persona {
+
   @PrimaryGeneratedColumn({ type: "bigint", name: "idPersona" })
   idPersona: number;
 
@@ -36,21 +27,24 @@ export class Persona {
   direccion: string | null;
 
   @Column("varchar", { name: "telefono", nullable: true })
-  telefono: string | null; 
-
-  // @Column("date", { name: "fechaAfiliacion" })
-  // fechaAfiliacion: string | null;
+  telefono: string | null;
 
   @Column("varchar", { name: "EstadoPersona", length: 1 })
   estadoPersona: string | null;
 
-  @ManyToOne(() => Genero, genero => genero.personas, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
-  @JoinColumn([{ name: "fk_genero" , referencedColumnName:'id' }])
+  @ManyToOne(() => Genero, genero => genero.personas)
+  @JoinColumn([{ name: "fk_genero", referencedColumnName: 'id' }])
   genero: Genero[] | null;
 
   @OneToMany(() => User, (user) => user.persona)
   users: User[];
 
-  @OneToMany(() => Vehiculo, (vechiculo) => vechiculo.propietarios)
+  @OneToMany(() => Vehiculo, (vechiculo) => vechiculo.tvehiculo)
   vechile: Vehiculo[];
+
+  @ManyToOne(() => empresa, empresa => empresa.persona)
+  @JoinColumn([{ name: "fk_idempresa", referencedColumnName: 'id_empresa' }])
+  empresa: empresa[];
+
+
 }

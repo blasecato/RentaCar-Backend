@@ -1,28 +1,32 @@
-import { Column, Entity, Index, JoinColumn, ManyToOne } from "typeorm";
-import { Conductor } from "./Conductor";
+import { Column, Entity, PrimaryGeneratedColumn, OneToOne, OneToMany, JoinColumn } from "typeorm";
+import { Vehiculo } from "./Vehiculo";
+import { Cronograma } from "./Cronograma";
 
-@Index("fk_planilla", ["fkIdConductor"], {})
+
+
 @Entity("planilla", { schema: "rentautos" })
 export class Planilla {
-  @Column("int", { primary: true, name: "CodPlanilla" })
+
+  @PrimaryGeneratedColumn({ type: "bigint", name: "codPlanilla" })
   codPlanilla: number;
 
-  @Column("datetime", { name: "FechaEmision" })
-  fechaEmision: Date;
+  @Column("datetime")
+  FechaEmision: Date;
 
-  @Column("datetime", { name: "FechaVencimiento" })
-  fechaVencimiento: Date;
+  @Column("datetime")
+  FechaVencimiento: Date;
 
-  @Column("varchar", { name: "lugarExpedicion", length: 30 })
+  @Column("varchar")
   lugarExpedicion: string;
 
-  @Column("int", { name: "fk_idConductor" })
-  fkIdConductor: number;
+  @OneToOne(() => Vehiculo, (vehiculo) => vehiculo.planilla)
+  vehiculo: Vehiculo[];
 
-  @ManyToOne(() => Conductor, (conductor) => conductor.planillas, {
-    onDelete: "NO ACTION",
-    onUpdate: "NO ACTION",
-  })
-  @JoinColumn([{ name: "fk_idConductor", referencedColumnName: "idConductor" }])
-  fkIdConductor2: Conductor;
+  @OneToMany(()=> Cronograma, (cronograma)=> cronograma.planilla)
+  crono: Cronograma[];
+  @JoinColumn({ name: "fk_planilla", referencedColumnName: 'CodPlanilla' })
+  cronogram: Cronograma[];
+  
+
+
 }
