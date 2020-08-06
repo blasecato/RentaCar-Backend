@@ -46,14 +46,14 @@ export class Vehiculo {
   recorrido: string;
 
   @ManyToOne(() => Persona, (person) => person.vehiculo)
-  @JoinColumn({ name: "fk_PersonaVehiculo", referencedColumnName: 'idPersona' })
+  @JoinColumn({ name: "fk_PersonaVehiculo" })
   persona: Persona;
 
   @ManyToOne(() => marca, (marca) => marca.vehicle)
   @JoinColumn({ name: "fk_marca"})
   marcas: marca;
 
-  @ManyToOne(() => Tipovehiculo, (tvehiculo) => tvehiculo.idTipoVehiculo)
+  @ManyToOne(() => Tipovehiculo, (tvehiculo) => tvehiculo.vehiculos)
   @JoinColumn({ name: "fk_tipoVehiculo"})
   tvehiculos: Tipovehiculo;
 

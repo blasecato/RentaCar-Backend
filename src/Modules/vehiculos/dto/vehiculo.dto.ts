@@ -45,5 +45,26 @@ export class VehiculoDto {
 
     @IsInt()
     persona : number;
+    
+    @IsInt()
+    marca : number;
+    
+    @IsInt()
+    tipovehiculo : number;
+    
+    @IsInt()
+    colorvehiculo : number;
+    
+    @IsInt()
+    planillavehiculo : number;
+    
+    @IsInt()
+    rentavehiculo : number;
+    
+    @IsInt()
+    estadovehiculo : number;
+    
+    @IsInt()
+    revisionvehiculo : number;
 
 }
