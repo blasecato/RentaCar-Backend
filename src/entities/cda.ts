@@ -18,8 +18,8 @@ export class cda {
     @Column("int")
     estado_cda: number;
 
-    @OneToOne(() => Documentacion, (documentacion) => documentacion.cda)
+    @OneToOne(type => Documentacion, (documentacion) => documentacion.cda)
     @JoinColumn()
-    documentacion: Documentacion[];
+    documentacion: Documentacion;
 
 }

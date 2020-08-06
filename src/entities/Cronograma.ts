@@ -24,12 +24,11 @@ export class Cronograma {
   horariocrono: Date;
 
   @ManyToOne(() => Planilla, (planilla)=> planilla.cronogram)
-  planilla: Planilla[];
+  planilla: Planilla;
 
   @ManyToOne(()=>Horario, (horario)=> horario.cronogramas)
-  horario: Horario[];
   @JoinColumn({ name: "fk_horario", referencedColumnName: 'idHorario' })
-  horarios:Horario[];
+  horarios:Horario;
 
   
 }

@@ -13,6 +13,6 @@ export class estado_vehiculo {
     
     
     @OneToOne(() => Vehiculo, (Vehiculo) => Vehiculo.estadovehiculo)
-    Vehiculo: Vehiculo[];
+    Vehiculo: Vehiculo;
 
 }

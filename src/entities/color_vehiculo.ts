@@ -14,7 +14,7 @@ export class color_vehiculo {
 
     
     @OneToOne(() => Vehiculo, (Vehiculo) => Vehiculo.color_vehi)
-    Vehiculo: Vehiculo[];
+    Vehiculo: Vehiculo;
 
 
 

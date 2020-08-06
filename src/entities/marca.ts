@@ -13,7 +13,7 @@ export class marca {
     nombre_marca: string;
 
     @OneToMany(() => Vehiculo, (Vehicle) => Vehicle.marcas)
-    vehicle: Vehiculo[];
+    vehicle: Vehiculo;
 
 
 }

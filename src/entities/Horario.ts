@@ -10,5 +10,5 @@ export class Horario {
   jornada: string;
 
   @OneToMany(() => Cronograma, (cronograma) => cronograma.horarios)
-  cronogramas: Cronograma[];
+  cronogramas: Cronograma;
 }

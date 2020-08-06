@@ -17,12 +17,12 @@ export class Documentacion {
 
   @OneToOne(() => Revision, (revision) => revision.documentacion)
   @JoinColumn()
-  revision: Revision[];
+  revision: Revision;
 
   @OneToOne(() => seguro, (Seguro) => Seguro.documentacion)
-  seguro: seguro[];
+  seguro: seguro;
 
   @OneToOne(() => cda, (Cda) => Cda.documentacion)
-  cda: cda[];
+  cda: cda;
 
 }

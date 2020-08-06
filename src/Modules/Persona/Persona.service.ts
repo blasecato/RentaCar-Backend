@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { Model } from 'mysql'
 import { Persona } from '../../entities/Persona';
 import { User } from '../../entities/User';
+import { Vehiculo } from 'src/entities/Vehiculo';
 
 @Injectable()
 export class PersonaService {
@@ -12,6 +13,7 @@ export class PersonaService {
   constructor(
     @InjectRepository(Persona) private readonly personaRepository: Repository<Persona>,
     @InjectRepository(User) private readonly userRepository: Repository<User>,
+    @InjectRepository(Vehiculo) private readonly vehiculoRepository: Repository<Vehiculo>,
   ) { }
 
 
@@ -45,6 +47,22 @@ export class PersonaService {
       .innerJoinAndSelect("user.persona", "persona")
       .where("email = :emails", { emails: email })
       .execute();
+  
+    }
+
+  async getByIdVehicle(id){
+    return await this.vehiculoRepository.createQueryBuilder("vehiculo")
+    .select("id_vehiculo", "id_vehiculo")
+    .addSelect("placa", "placa")
+    .addSelect("modelo", "modelo")
+    .addSelect("cilindraje", "cilindraje")
+    .addSelect("capacidad", "capacidad")
+    .addSelect("numInterno", "numInterno")
+    .addSelect("descripcion", "descripcion")
+    .addSelect("recorrido", "recorrido")
+    .innerJoinAndSelect("persona", "vehiculo.persona")
+    .where("id_vehiculo = :ids", { ids: id })
+    .execute();
   }
 
   //   create(genero) {
@@ -62,4 +80,6 @@ export class PersonaService {
   // async update(id, Genero): Promise<Genero>{
   //    return await this.generoRepository.update(id , Genero);
   // }
+
+  
 }

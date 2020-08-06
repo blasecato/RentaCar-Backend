@@ -17,6 +17,6 @@ export class renta_vehiculo {
 
     
     @OneToOne(() => Vehiculo, (Vehiculo) => Vehiculo.rentavehiculo)
-    Vehiculo: Vehiculo[];
+    Vehiculo: Vehiculo;
 
 }

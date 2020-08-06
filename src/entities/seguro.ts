@@ -20,6 +20,6 @@ export class seguro {
 
   @OneToOne(() => Documentacion, (documentacion) => documentacion.seguro)
   @JoinColumn()
-  documentacion: Documentacion[];
+  documentacion: Documentacion;
 
 }

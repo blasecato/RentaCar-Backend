@@ -23,9 +23,8 @@ export class Planilla {
   vehiculo: Vehiculo[];
 
   @OneToMany(()=> Cronograma, (cronograma)=> cronograma.planilla)
-  crono: Cronograma[];
   @JoinColumn({ name: "fk_planilla", referencedColumnName: 'CodPlanilla' })
-  cronogram: Cronograma[];
+  cronogram: Cronograma;
   
 
 

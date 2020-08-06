@@ -32,19 +32,19 @@ export class Persona {
   @Column("varchar", { name: "EstadoPersona", length: 1 })
   estadoPersona: string | null;
 
-  @ManyToOne(() => Genero, genero => genero.personas)
+  @ManyToOne(type => Genero, genero => genero.personas)
   @JoinColumn([{ name: "fk_genero", referencedColumnName: 'id' }])
-  genero: Genero[] | null;
+  genero: Genero | null;
 
-  @OneToMany(() => User, (user) => user.persona)
-  users: User[];
+  @OneToMany(type => User, (user) => user.persona)
+  users: User;
 
-  @OneToMany(() => Vehiculo, (vechiculo) => vechiculo.tvehiculo)
-  vechile: Vehiculo[];
+  @OneToMany(type => Vehiculo, (vechiculo) => vechiculo.persona)
+  vehiculo: Vehiculo;
 
-  @ManyToOne(() => empresa, empresa => empresa.persona)
+  @ManyToOne(type => empresa, empresa => empresa.persona)
   @JoinColumn([{ name: "fk_idempresa", referencedColumnName: 'id_empresa' }])
-  empresa: empresa[];
+  empresa: empresa;
 
 
 }

@@ -21,7 +21,7 @@ export class empresa {
     nit: string;
 
     @OneToMany(() => Persona, (persona) => persona.empresa)
-    persona: Persona[];
+    persona: Persona;
 
 
 

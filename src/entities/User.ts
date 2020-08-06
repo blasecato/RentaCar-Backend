@@ -11,6 +11,7 @@ import { Rolpersona } from "./Rolpersona";
 
 @Entity("user", { schema: "rentautos" })
 export class User {
+
   @PrimaryGeneratedColumn({ type: "bigint", name: "idUser" })
   idUser: number;
 
@@ -27,5 +28,5 @@ export class User {
   @ManyToOne(() => Rolpersona, (rolpersona) => rolpersona.users)
   @JoinColumn([{ name: "fk_IDRolPersona", referencedColumnName: "idRolPersona" }])
   rolPersona: Rolpersona;
-  
+
 }

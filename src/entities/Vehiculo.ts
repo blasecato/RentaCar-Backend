@@ -45,39 +45,36 @@ export class Vehiculo {
   @Column("varchar")
   recorrido: string;
 
-  @ManyToOne(() => Persona, (person) => person.idPersona,)
-  person: Persona[];
+  @ManyToOne(() => Persona, (person) => person.vehiculo)
   @JoinColumn({ name: "fk_PersonaVehiculo", referencedColumnName: 'idPersona' })
-  persona: Persona[];
+  persona: Persona;
 
   @ManyToOne(() => marca, (marca) => marca.vehicle)
-  marca: marca[];
-  @JoinColumn({ name: "fk_marca", referencedColumnName: 'id_vehiculo' })
-  marcas: marca[];
+  @JoinColumn({ name: "fk_marca"})
+  marcas: marca;
 
   @ManyToOne(() => Tipovehiculo, (tvehiculo) => tvehiculo.idTipoVehiculo)
-  tvehiculo: Tipovehiculo[];
-  @JoinColumn({ name: "fk_tipoVehiculo", referencedColumnName: 'id_vehiculo' })
-  tvehiculos: Tipovehiculo[];
+  @JoinColumn({ name: "fk_tipoVehiculo"})
+  tvehiculos: Tipovehiculo;
 
   @OneToOne(() => color_vehiculo, (color_vehi) => color_vehi.Vehiculo)
   @JoinColumn()
-  color_vehi: color_vehiculo[];
+  color_vehi: color_vehiculo;
 
   @OneToOne(() => Planilla, (planilla) => planilla.vehiculo)
   @JoinColumn()
-  planilla: Planilla[];
+  planilla: Planilla;
 
   @OneToOne(() => renta_vehiculo, (rentavehiculo) => rentavehiculo.Vehiculo)
   @JoinColumn()
-  rentavehiculo: renta_vehiculo[];
+  rentavehiculo: renta_vehiculo;
 
   @OneToOne(() => estado_vehiculo, (estadovehiculo) => estadovehiculo.Vehiculo)
   @JoinColumn()
-  estadovehiculo: estado_vehiculo[];
+  estadovehiculo: estado_vehiculo;
 
-  @OneToMany(() => Revision, (revision) => revision.vehiculo)
+  @OneToMany(() => Revision, (revision) => revision.vehiculos)
   @JoinColumn()
-  revision: Revision[];
+  revision: Revision;
 
 }

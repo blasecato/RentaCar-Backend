@@ -6,11 +6,12 @@ import { PersonaController } from './persona.controller';
 import { PersonaService } from './persona.service';
 import { Rolpersona } from 'src/entities/Rolpersona';
 import { Genero } from 'src/entities/Genero';
+import { Vehiculo } from 'src/entities/Vehiculo';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Persona, User, Rolpersona, Genero])],
+  imports: [TypeOrmModule.forFeature([Persona, User, Rolpersona, Genero,Vehiculo])],
   providers: [PersonaService],
-  controllers: [PersonaController, PersonaController],
+  controllers: [PersonaController],
 })
 
 

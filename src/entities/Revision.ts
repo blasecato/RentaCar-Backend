@@ -13,12 +13,11 @@ export class Revision {
   FechaRevision: Date;
 
   @ManyToOne(() => Vehiculo, (vehiculo) => vehiculo)
-  vehiculo: Vehiculo[];
   @JoinColumn({ name: "fkvehiculo", referencedColumnName: "id_vehiculo" })
-  vehiculos: Vehiculo[];
+  vehiculos: Vehiculo;
 
   
   @OneToOne(() => Documentacion, (documentacion) => documentacion.revision)
-  documentacion: Documentacion[];
+  documentacion: Documentacion;
 
 }

@@ -12,6 +12,6 @@ export class Tipovehiculo {
   descripcion: string;
 
   @OneToMany(() => Vehiculo, (vehiculo) => vehiculo.tvehiculos)
-  vehiculos: Vehiculo[];
+  vehiculos: Vehiculo;
   
 }

@@ -10,5 +10,5 @@ export class Genero {
   nombre: string | null;
 
   @OneToMany(() => Persona, persona => persona.genero)
-  personas: Persona[];
+  personas: Persona;
 }
